@@ -13,6 +13,7 @@ public interface IUserRepo extends JpaRepository<Usuario, Integer> {
     //@Query("FROM sistema1.Usuario u WHERE u.username = ?")
     //Derived Query
     //@Query(value = "select *  FROM user_data u  where u.username = ?",nativeQuery = true)
+
     Usuario findByUsername(String username);
 
     @Query(value = "select * from usuario where username like '%'||:username||'%'  and tpparticipe like '%'||:tpparticipe||'%' ",nativeQuery = true)
@@ -24,8 +25,8 @@ public interface IUserRepo extends JpaRepository<Usuario, Integer> {
     Integer saveusuario(@Param("pusuario_id") Integer pusuario_id,@Param("ppassword") String ppassword);
 
 
-    @Query(value = "select * from usuario where email like '%'||:pemail||'%'",nativeQuery = true)
-    Usuario existeEmailLike(@Param("pemail") String pemail);
+    @Query(value = "select * from usuario where email like '%'||:pemail||'%' and username= :pusername  and tpparticipe= :ptpparticipe",nativeQuery = true)
+    Usuario existeEmailLike(@Param("pemail") String pemail,@Param("pusername") String pusername,@Param("ptpparticipe") String ptpparticipe);
 
 
 

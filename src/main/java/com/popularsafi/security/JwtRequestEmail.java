@@ -13,5 +13,7 @@ public class JwtRequestEmail implements Serializable {
     private String correo;
     private String ipaddress;
     private String tipo;
+    private String tparticipe;
+    private String username;
 
 }

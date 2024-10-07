@@ -20,9 +20,11 @@ public class FiledocumentoRutaController {
 
     @GetMapping("/listafile/{pfile}")
     public ResponseEntity<FileDocumentoRuta> listafile(@PathVariable("pfile") String pfile) throws Exception {
+        System.out.println("datos"+pfile);
         FileDocumentoRuta oFileRuta= new FileDocumentoRuta();
         try {
             oFileRuta=iFileDocumentoService.findByDocumentoAll(pfile);
+            System.out.println(oFileRuta.getContenido());
         } catch (Exception exception) {
             //    System.out.println("nombre"+nombre1);
             exception.printStackTrace();
@@ -45,8 +47,7 @@ public class FiledocumentoRutaController {
     public ResponseEntity<byte[]> visualizareporte(@RequestBody JwtRequestRuta jwtRequestRuta) throws Exception{
         System.out.println("info"+jwtRequestRuta.getRuta());
         byte[] data=iFileDocumentoService.generateReport(jwtRequestRuta.getRuta());
-        System.out.println("resultado"+data);
-
+        System.out.println(data);
         return new ResponseEntity<>(data,HttpStatus.OK);
     }
 

@@ -34,8 +34,8 @@ public  class UserServiceImpl  {
         return usuarioRepository.saveusuario(pusuario_id,password);
     }
 
-     public Usuario existeEmailLike(String pemail){
-        return usuarioRepository.existeEmailLike(pemail);
+     public Usuario existeEmailLike(String pemail, String pusername, String ptpparticipe){
+        return usuarioRepository.existeEmailLike(pemail, pusername, ptpparticipe);
      }
 
 

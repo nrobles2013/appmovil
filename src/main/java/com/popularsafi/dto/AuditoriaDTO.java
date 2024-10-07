@@ -24,7 +24,6 @@ public class AuditoriaDTO {
     private String descripcion;
     private String tpparticipe;
     private String cparticipe;
-    private Timestamp fecha_registro;
     private String tipo;
 
 }

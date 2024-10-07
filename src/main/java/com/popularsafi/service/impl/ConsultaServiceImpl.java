@@ -116,8 +116,10 @@ public class ConsultaServiceImpl implements IConsultaService {
 
             Transport t = session.getTransport("smtp");
             t.connect((String) props.get("mail.smtp.user"), (String) props.get("mail.smtp.password"));
+            System.out.println("por aca paso6");
             t.sendMessage(message, message.getAllRecipients());
             t.close();
+            System.out.println("finalizo");
 
         }
         catch (AddressException ae) {

@@ -12,7 +12,7 @@ import java.io.Serializable;
 public class JwtRequestPass implements Serializable {
     private String username;
     private String password;
-    private String correo;
+    private String email;
     private Integer usuario_id;
     private String codigover;
 }

@@ -1,7 +1,0 @@
-spring:
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://segurfce.popular-safi.com/realms/popularsafi
-          #jwk-set-uri: https://segurfce.popular-safi.com/realms/popularsafi/.well-known/openid-configuration

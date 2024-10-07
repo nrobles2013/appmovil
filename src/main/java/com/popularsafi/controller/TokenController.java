@@ -1,6 +1,5 @@
 package com.popularsafi.controller;
 
-import com.google.gson.Gson;
 import com.popularsafi.model.Role;
 import com.popularsafi.model.Usuario;
 import com.popularsafi.security.*;
@@ -8,7 +7,6 @@ import com.popularsafi.service.IAuditoriaService;
 import com.popularsafi.service.IConsultaService;
 import com.popularsafi.service.ISeguridadService;
 import com.popularsafi.service.impl.UserServiceImpl;
-import com.popularsafi.service.impl.KeyCloakServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +36,7 @@ public class TokenController {
     @Autowired
     PasswordEncoder passwordEncoder;
 
-    private final KeyCloakServiceImpl keycloakService;
+    //private final KeyCloakServiceImpl keycloakService;
 
     @Autowired
     private IAuditoriaService iAuditoriaService;
@@ -63,8 +61,8 @@ public class TokenController {
     @PostMapping(value="/user/add")
     public ResponseEntity<Boolean> createUser(@RequestBody Usuario user) throws  Exception{
         System.out.println("por aca paso"+user.getUsername()+user.getPassword());
-        boolean rpta =  keycloakService.addUser(user);
-        if (rpta) {
+        //boolean rpta =  keycloakService.addUser(user);
+        //if (rpta) {
             Usuario usuario =
                     new Usuario(user.getNombre(), user.getApellido(), user.getUsername(), user.getEmail(),
                             passwordEncoder.encode(user.getPassword()), user.getTelefono(), user.getCelular(),user.getTpparticipe(), true,0,user.getCparticipe());
@@ -76,17 +74,17 @@ public class TokenController {
             System.out.println("paso paso2");
 
             usuarioService.save(usuario);
-        }
-        return new ResponseEntity<>(rpta, HttpStatus.OK);
+        //}
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
 
     @PutMapping(value="/user/update")
     public ResponseEntity<Boolean> updateUser(@RequestBody Usuario user) throws  Exception{
         System.out.println("por aca paso"+user.getUsuario_id()+user.getPassword());
-        boolean rpta =  keycloakService.updateUser(user);
+      //  boolean rpta =  keycloakService.updateUser(user);
 
-        if (rpta) {
+       // if (rpta) {
             Usuario usuario =
                     new Usuario( user.getUsuario_id(),  passwordEncoder.encode(user.getPassword()));
             Set<Role> roles = new HashSet<>();
@@ -97,8 +95,8 @@ public class TokenController {
             System.out.println("paso paso2");
 
             usuarioService.saveusuario(usuario.getUsuario_id(),usuario.getPassword());
-        }
-        return new ResponseEntity<>(rpta, HttpStatus.OK);
+        //}
+        return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
 
@@ -107,15 +105,15 @@ public class TokenController {
     @PostMapping("/user/reseteo")
     public ResponseEntity<JwtResponsePass> ResteoContraseña(@RequestBody JwtRequestEmail jwtRequestEmail) throws Exception {
         String mensaje="" ;
-          Usuario usu= usuarioService.existeEmailLike(jwtRequestEmail.getCorreo().trim());
+        System.out.println("correo es" + jwtRequestEmail.getCorreo().trim());
+          Usuario usu= usuarioService.existeEmailLike(jwtRequestEmail.getCorreo().trim(),jwtRequestEmail.getUsername().trim(),jwtRequestEmail.getTparticipe().trim());
+          System.out.println("sistem"+usu.getUsername());
             String Codigoverificacion=getRandomString();
             if (usu.getEmail() != null){
                 String body=  "<html><body> se envia codigo de verificación: " + Codigoverificacion +
                         "<p><p><p><p><p><img src='https://ci3.googleusercontent.com/mail-sig/AIorK4zp0xnuCxJiBiWM8IhxrixsCRYNscTIa2gACv65i5giCUA-Kq0YJFc9hyfFktNgdyFY22gifu0'  width='450' height='160'/"+
                         " </body></html>";
                 String subject="Portal Web Participe - Solicitud de Reseteo de contraseña" ;
-                String from="";
-                String pass="";
                 String[] file =new String[6];
                 String correo=jwtRequestEmail.getCorreo();
                 String[] to= correo.trim().split(",");;
@@ -138,13 +136,13 @@ public class TokenController {
                 String ssegundosf = String.format("%02d", segundosf);
                 Timestamp stamp = new Timestamp(calendario.getInstance().getTimeInMillis());
                 iSeguridadService.savecodigo(usu.getUsuario_id(),usu.getUsername(), Codigoverificacion,shora + ":" + sminutos + ":" + ssegundos,shoraf + ":" + sminutosf + ":" + ssegundosf );
-                iAuditoriaService.insertarAuditoria("Petición de contraseña ",jwtRequestEmail.getIpaddress(),usu.getTpparticipe(),usu.getCparticipe(),usu.getUsername(),stamp,jwtRequestEmail.getTipo());
+                iAuditoriaService.insertarAuditoria("Petición de contraseña ",jwtRequestEmail.getIpaddress(),usu.getTpparticipe(),usu.getCparticipe(),usu.getUsername(),jwtRequestEmail.getTipo());
                 mensaje="ok";
 
             }else{
                 mensaje="no existe el correo del participe";
             }
-        return new  ResponseEntity<JwtResponsePass>(new JwtResponsePass(usu.getUsuario_id(),usu.getUsername(),jwtRequestEmail.getCorreo(),mensaje), HttpStatus.OK) ;
+        return new  ResponseEntity<JwtResponsePass>(new JwtResponsePass(usu.getUsuario_id(),usu.getUsername(),jwtRequestEmail.getCorreo(),jwtRequestEmail.getTparticipe().trim(),mensaje), HttpStatus.OK) ;
     }
 
 
@@ -171,9 +169,9 @@ public class TokenController {
             user.setUsername(jwtRequestpass.getUsername().trim());
             user.setUsuario_id(jwtRequestpass.getUsuario_id());
             user.setPassword(jwtRequestpass.getPassword().trim());
-            boolean rpta = keycloakService.updateUser(user);
+        //    boolean rpta = keycloakService.updateUser(user);
 
-            if (rpta) {
+          //  if (rpta) {
                 Usuario usuario =
                         new Usuario(user.getUsuario_id(), passwordEncoder.encode(user.getPassword().trim()));
                 Set<Role> roles = new HashSet<>();
@@ -189,9 +187,9 @@ public class TokenController {
                 mensaje="no actualizo contraseña";
 
             }
-        }else{
-            mensaje="codigo de verificacion ya expiro";
-        }
+        //}else{
+          //  mensaje="codigo de verificacion ya expiro";
+       // }
         return new  ResponseEntity<JwtResponseRuta>(new JwtResponseRuta(mensaje), HttpStatus.OK) ;
     }
 
@@ -215,7 +213,7 @@ public class TokenController {
     @PostMapping("/user/numeropermiso")
     public ResponseEntity<Integer> listaacceso(@RequestBody Usuario user) throws Exception {
         int resp;
-        System.out.println(user.getTpparticipe()+user.getUsername().trim());
+        //System.out.println(user.getTpparticipe()+user.getUsername().trim());
         resp=iSeguridadService.listaacceso(user.getTpparticipe(),user.getUsername().trim());
 
         return new  ResponseEntity<Integer>(resp, HttpStatus.OK) ;
@@ -267,14 +265,14 @@ public class TokenController {
             String pass="";
             String[] file =new String[6];
             String correo=this.oculto; //this.usuario
-            String[] to= correo.trim().split(",");;
+            String[] to= correo.trim().split(",");
             iConsultaService.sendFromGMail(this.usuario, this.password, to, subject, body, file);
             mensaje="ok";
 
         }else{
             mensaje="no existe el correo del participe";
         }
-        return new  ResponseEntity<JwtResponsePass>(new JwtResponsePass(0,"","",mensaje), HttpStatus.OK) ;
+        return new  ResponseEntity<JwtResponsePass>(new JwtResponsePass(0,"","","",mensaje), HttpStatus.OK) ;
     }
 
     @PutMapping(value="/user/dapermiso")

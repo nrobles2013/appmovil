@@ -11,7 +11,7 @@
     <groupId>com.popularsafi</groupId>
     <artifactId>appsafimovil</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-   <packaging>jar</packaging>
+   <packaging>war</packaging>
     <name>appsafimovil</name>
     <description>appsafimovil</description>
     

@@ -8,5 +8,5 @@ import java.util.Date;
 import java.util.List;
 
 public interface IAuditoriaService extends ICRUD<Auditoria,Integer>{
-    List<?> insertarAuditoria(String pDescripcion, String pIp_maquina, String pTpparticipe,String pcparticipe, String pUsername, Timestamp pfecha,String ptipo);
+    List<?> insertarAuditoria(String pDescripcion, String pIp_maquina, String pTpparticipe,String pcparticipe, String pUsername,String ptipo);
 }

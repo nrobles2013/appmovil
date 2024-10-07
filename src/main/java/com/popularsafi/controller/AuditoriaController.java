@@ -30,7 +30,7 @@ public class AuditoriaController {
                 "cparticipe"+audi.getCparticipe()
         );
         try {
-            oAuditoria=iAuditoriaService.insertarAuditoria(audi.getDescripcion(),audi.getIp_maquina(),audi.getTpparticipe(),audi.getCparticipe(), audi.getUsername(),audi.getFecha_registro(),audi.getTipo());
+            oAuditoria=iAuditoriaService.insertarAuditoria(audi.getDescripcion(),audi.getIp_maquina(),audi.getTpparticipe(),audi.getCparticipe(), audi.getUsername(),audi.getTipo());
         } catch (Exception exception) {
             //    System.out.println("nombre"+nombre1);
             exception.printStackTrace();

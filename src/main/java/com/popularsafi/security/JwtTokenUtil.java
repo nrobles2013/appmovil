@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 public class JwtTokenUtil implements Serializable {
 
     //milisegundos
-    public final long JWT_TOKEN_VALIDITY = 5 * 60 * 60 * 1000; //5 horas
+    public final long JWT_TOKEN_VALIDITY = 1 * 5 * 60 * 1000; //5 min
 
     @Value("${jwt.secret}") //EL Expression Language
     private String secret;

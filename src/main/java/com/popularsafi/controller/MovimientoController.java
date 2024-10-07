@@ -60,7 +60,7 @@ public class MovimientoController {
     public ResponseEntity<List<MovimientosDTO>> listamovimientos(@RequestBody JwtRequestMovi jwtRequest) throws Exception {
          List<MovimientosDTO> oMovimiento= new ArrayList<>();
         try {
-           oMovimiento  = iMovimientosService.findMovimientos(jwtRequest.getUsuario_id(),jwtRequest.getPanio(),jwtRequest.getPmes(),jwtRequest.getPtransa()).stream().map(this::convertToDto).collect(Collectors.toList());
+           oMovimiento  = iMovimientosService.findMovimientos(jwtRequest.getUsuario_id(),jwtRequest.getAnio(),jwtRequest.getMes(),jwtRequest.getTransa()).stream().map(this::convertToDto).collect(Collectors.toList());
             //oMovimiento=iMovimientosService.findMovimientos(
         } catch (Exception exception) {
             exception.printStackTrace();

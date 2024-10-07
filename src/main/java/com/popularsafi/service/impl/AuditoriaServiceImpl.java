@@ -22,8 +22,8 @@ public class AuditoriaServiceImpl implements IAuditoriaService{
 
 
     @Override
-    public List<?> insertarAuditoria(String pDescripcion, String pIp_maquina, String pTpparticipe,String pcparticipe, String pUsername, Timestamp pFecha,String ptipo) {
-        return auditoriaRepo.insertarAuditoria(pDescripcion,pIp_maquina,pTpparticipe,pcparticipe,pUsername,pFecha,ptipo);
+    public List<?> insertarAuditoria(String pDescripcion, String pIp_maquina, String pTpparticipe,String pcparticipe, String pUsername, String ptipo) {
+        return auditoriaRepo.insertarAuditoria(pDescripcion,pIp_maquina,pTpparticipe,pcparticipe,pUsername,ptipo);
     }
 
     @Override

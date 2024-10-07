@@ -38,8 +38,8 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public UserDetails loadUserByTipoUsername(String cptipoparticipe, String username) throws UsernameNotFoundException {
+        System.out.println("loadUserByTipoUsername"+ username);
         Usuario usuario = repo.findByUsernameLike(cptipoparticipe.trim(),username.trim());
-        System.out.println("loadUserByUsername"+ usuario.getUsername());
         if(usuario == null){
             throw new UsernameNotFoundException(String.format("Usuario not exists", username));
         }

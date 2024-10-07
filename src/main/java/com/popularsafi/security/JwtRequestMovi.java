@@ -10,8 +10,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JwtRequestMovi implements Serializable {
-    private Integer panio;
-    private Integer pmes;
+    private Integer anio;
+    private Integer mes;
     private Integer usuario_id;
-    private String  ptransa;
+    private String  transa;
 }

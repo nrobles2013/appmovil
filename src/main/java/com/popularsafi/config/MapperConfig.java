@@ -23,16 +23,6 @@ import java.util.Date;
 public class MapperConfig {
 
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
-        return authenticationConfiguration.getAuthenticationManager();
-    }
-
-    @Bean
-    public static PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
     @Bean("notificacionMapper")
     public ModelMapper notificacionMapper() {
         ModelMapper mapper = new ModelMapper();

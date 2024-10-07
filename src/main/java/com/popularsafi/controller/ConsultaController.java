@@ -50,13 +50,10 @@ public class ConsultaController {
     @PostMapping("/enviocorreo")
     public ResponseEntity<JwtResponseRuta> enviarCorreo(@RequestBody JwtRequestRuta jwtRequestRuta) throws Exception {
         String mensaje="" ;
-        System.out.println("tipo"+jwtRequestRuta.getTparticipe());
-        System.out.println("ssss"+jwtRequestRuta.getAnio());
-        System.out.println("rrr"+jwtRequestRuta.getPeriodo());
+
         if (jwtRequestRuta.getCorreo()!=null){
         TipoDocumento tdoc=new TipoDocumento();
-       tdoc =iTipoDocumentoService.findTipoOneDocum(jwtRequestRuta.getTipodocumento());
-        System.out.println(jwtRequestRuta.getRuta()+"  "+ jwtRequestRuta.getTipodocumento());
+        tdoc =iTipoDocumentoService.findTipoOneDocum(jwtRequestRuta.getTipodocumento());
 
          String subject="Portal Web Participe (Consulta) - Solicitud de documento " ;
          String lsperiodo="";
@@ -73,7 +70,6 @@ public class ConsultaController {
              if (jwtRequestRuta.getPeriodo().equals("04")){
                  lsperiodo = " 4to Periodo";
              }
-
          }
             String body=  GeneraPlantilla(subject, "","se envia el documento de " +tdoc.getDescripcion() + " del año " + jwtRequestRuta.getAnio() + " " + lsperiodo);
 
@@ -115,7 +111,7 @@ public class ConsultaController {
     @GetMapping("/traedocumentos/{iddoc}/{cpart}")
     public ResponseEntity<List<UtilDocumento>> traedocumentos(@PathVariable("iddoc") String iddoc,@PathVariable("cpart") String cpart) throws Exception {
         FileDocumentoRuta tdoc=new FileDocumentoRuta();
-        System.out.println(iddoc);
+      //  System.out.println(iddoc);
         tdoc =iFileDocumentoService.findByDocumentoAll(iddoc);
         File fDirectorio=null;
         if (iddoc.equals("0002")) {

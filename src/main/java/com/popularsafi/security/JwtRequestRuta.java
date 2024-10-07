@@ -11,11 +11,12 @@ import java.io.Serializable;
 @NoArgsConstructor
 public class JwtRequestRuta implements Serializable {
     private String tparticipe;
+    private String username;
     private String ruta;
     private String cparticipe;
     private String tipodocumento;
-    private String nombredocumento;
     private String correo;
     private String anio;
     private String periodo;
+    private String nombredocumento;
 }

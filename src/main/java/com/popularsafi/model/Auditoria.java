@@ -28,6 +28,9 @@ public class Auditoria {
 
     private Timestamp fecha_registro;
 
+    private String username;
+
+
     private String tipo;
 
     @Column(nullable = false, length = 60)

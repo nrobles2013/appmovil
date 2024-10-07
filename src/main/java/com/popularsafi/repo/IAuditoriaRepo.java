@@ -12,12 +12,11 @@ import java.util.List;
 public interface IAuditoriaRepo extends IGenericRepo<Auditoria,Integer> {
 
 
-    @Query(value="select * from public.insertarauditoria(:pDescripcion,:pIp_maquina, :pTpparticipe,:pcparticipe,:pUsername,:pFecha,:ptipo)",nativeQuery = true)
+    @Query(value="select * from public.insertarauditoria(:pDescripcion,:pIp_maquina, :pTpparticipe,:pcparticipe,:pUsername,:ptipo)",nativeQuery = true)
     List<?> insertarAuditoria(@Param("pDescripcion") String pDescripcion,
                                      @Param("pIp_maquina") String pIp_maquina,
                                       @Param("pTpparticipe") String pTpparticipe,
                                       @Param("pcparticipe") String pcparticipe,
                                       @Param("pUsername") String pUsername,
-                                      @Param("pFecha") Timestamp pFecha,
                                       @Param("ptipo") String ptipo);
 }

@@ -48,8 +48,8 @@ public class DocumentoController {
     @PostMapping("/enviocorreo")
     public ResponseEntity<JwtResponseRuta> enviarCorreo(@RequestBody JwtRequestRuta jwtRequestRuta) throws Exception {
         String mensaje = "";
-        String[] file = new String[1];
         String urlRuta = jwtRequestRuta.getRuta().trim().substring(0,jwtRequestRuta.getRuta().length()-(jwtRequestRuta.getNombredocumento().length()+4));
+        String[] file = new String[1];
         File fDirectorio = new File(urlRuta);
         Boolean lnexiste = false;
         System.out.println("paso por acas1"+jwtRequestRuta.getNombredocumento());
@@ -58,7 +58,6 @@ public class DocumentoController {
           //  String body = "<html><body> se envia información del documento " + jwtRequestRuta.getNombredocumento() + " </body>" +
           //          "<p><p><p><p><img src='https://ci3.googleusercontent.com/mail-sig/AIorK4zp0xnuCxJiBiWM8IhxrixsCRYNscTIa2gACv65i5giCUA-Kq0YJFc9hyfFktNgdyFY22gifu0'  width='450' height='160'/> </html>";
             String subject = "Portal Web Participe (Documentos) - Solicitud de documento " ;
-
 
             String body=  GeneraPlantilla(subject, "","se envia información del documento  " + jwtRequestRuta.getNombredocumento());
 
